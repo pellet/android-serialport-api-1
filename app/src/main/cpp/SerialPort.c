@@ -1,5 +1,6 @@
 /*
  * Copyright 2009-2011 Cedric Priscal
+ * Edited 2017 Benjamin Erdnüß
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -123,6 +124,7 @@ JNIEXPORT jobject JNICALL Java_com_erdnuess_serialexample_SerialPort_open
         cfsetispeed(&cfg, speed);
         cfsetospeed(&cfg, speed);
 
+        //Edit: Benjamin Erdnüß
         //SOMEHOW tcsetattr() returns -1 even though it passes. Imagine my dissappointment...
         //It seems that my android device always answers "no" to isatty(), I thought I may document this here...
         /*if(isatty(fd)){
@@ -130,13 +132,16 @@ JNIEXPORT jobject JNICALL Java_com_erdnuess_serialexample_SerialPort_open
             LOGE("Terminalcheck on filedescriptor %i: %s", fd, strerror(errnum));
         }*/
 
-        /*if (tcsetattr(fd, TCSANOW, &cfg) == -1)
+        //Original lines commented below:
+        /*
+        if (tcsetattr(fd, TCSANOW, &cfg))
         {
-            int errnum = errno;
-            LOGE("tcsetattr() at fd %i failed: %s", fd,strerror(errnum));
+            LOGE("tcsetattr() failed");
             close(fd);
+            // TODO: throw an exception
             return NULL;
-        }*/
+        }
+        */
         tcsetattr(fd, TCSANOW, &cfg);
     }
 

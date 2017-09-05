@@ -1,6 +1,7 @@
 /*
  * Copyright 2009 Cedric Priscal
- * 
+ * Edit 2017 Benjamin Erdnüß
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -40,12 +41,14 @@ public class ConsoleActivity extends SerialPortActivity {
 
 //		setTitle("Loopback test");
 		mReception = (EditText) findViewById(R.id.EditTextReception);
-		EditText Emission = (EditText) findViewById(R.id.EditTextEmission);
 
         /*
-            Damit der Listener nicht mehrmals feuert, muss die Eigenschaft - android:inputType="textNoSuggestions" - an das Textobjekt geheftet werden!
-            Siehe https://stackoverflow.com/a/19298614
-         */
+            Edit: Benjamin Erdnüß
+            Originally, the EditText "Emmission" got an EditorActionListener but it did not seem to work like it should. I worked around with a TextChangedListener.
+            To prevent the textbox to fire the event multiple times, I added - android:inputType="textNoSuggestions" - to the textbox in the layout file!
+            Reference: https://stackoverflow.com/a/19298614
+        */
+        EditText Emission = (EditText) findViewById(R.id.EditTextEmission);
         Emission.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
