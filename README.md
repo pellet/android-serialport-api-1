@@ -13,7 +13,8 @@ To use this project you need to activate some SDK Tools in the Android SDK-Manag
 Maybe you don't need all of those, but I am too lazy to test that at this point.
 
 ---
-Copyright 2009 Cedric Priscal
+Copyright 2009 Cedric Priscal 
+
 Ported 2017 Benjamin Erdnüß
 
 Licensed under the Apache License, Version 2.0 (the "License");
