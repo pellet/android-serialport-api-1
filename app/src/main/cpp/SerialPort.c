@@ -22,6 +22,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <jni.h>
+#include <errno.h>
 
 #include "SerialPort.h"
 
