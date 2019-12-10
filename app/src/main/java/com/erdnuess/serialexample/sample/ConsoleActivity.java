@@ -45,7 +45,8 @@ public class ConsoleActivity extends SerialPortActivity {
         /*
             Edit: Benjamin Erdnüß
             Originally, the EditText "Emmission" got an EditorActionListener but it did not seem to work like it should. I worked around with a TextChangedListener.
-            To prevent the textbox to fire the event multiple times, I added - android:inputType="textNoSuggestions" - to the textbox in the layout file!
+            To prevent the textbox to fire the event multiple times, I added - android:
+            ="textNoSuggestions" - to the textbox in the layout file!
             Reference: https://stackoverflow.com/a/19298614
         */
         EditText Emission = (EditText) findViewById(R.id.EditTextEmission);
@@ -60,7 +61,13 @@ public class ConsoleActivity extends SerialPortActivity {
             public void afterTextChanged(Editable editable) {
                 char c = editable.charAt(editable.length() - 1);
                 try {
+                    if (c == '\n')
+                    {
+                        //Write carriage return before newline as expected by modems.
+                        mOutputStream.write('\r');
+                    }
                     mOutputStream.write(c);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
